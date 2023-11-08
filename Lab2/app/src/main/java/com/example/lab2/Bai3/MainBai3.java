@@ -13,7 +13,7 @@ import com.example.lab2.R;
 public class MainBai3 extends AppCompatActivity implements View.OnClickListener {
     TextView tvkq;
     EditText edtCanh;
-    Button btnGui;
+    Button btnGui, btnBack;
     String strCanh;
 
     BackgroundTask_POST_bai3 postBai3;
@@ -28,6 +28,15 @@ public class MainBai3 extends AppCompatActivity implements View.OnClickListener 
         edtCanh = findViewById(R.id.edtCanh);
         btnGui = findViewById(R.id.btnGui);
         btnGui.setOnClickListener(this);
+
+        btnBack = findViewById(R.id.btnBack); // Gán nút "Back" từ layout
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Xử lý khi nút "Back" được nhấn
+                onBackPressed(); // Quay trở lại màn hình chính (MainActivity)
+            }
+        });
     }
 
     @Override

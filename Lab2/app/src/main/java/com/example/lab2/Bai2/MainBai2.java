@@ -13,7 +13,7 @@ import com.example.lab2.R;
 public class MainBai2 extends AppCompatActivity implements View.OnClickListener {
     TextView tvkq;
     EditText edtDai, edtRong;
-    Button btnLoad;
+    Button btnLoad, btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,14 @@ public class MainBai2 extends AppCompatActivity implements View.OnClickListener 
         btnLoad = findViewById(R.id.btnSend2);
 
         btnLoad.setOnClickListener(this);
+        btnBack = findViewById(R.id.btnBack); // Gán nút "Back" từ layout
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Xử lý khi nút "Back" được nhấn
+                onBackPressed(); // Quay trở lại màn hình chính (MainActivity)
+            }
+        });
     }
 
     @Override

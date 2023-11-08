@@ -15,7 +15,7 @@ public class MainBai1 extends AppCompatActivity implements View.OnClickListener 
     TextView tvkq;
     String link;
     EditText edtName, edtScore;
-    Button btnLoad;
+    Button btnLoad, btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,14 @@ public class MainBai1 extends AppCompatActivity implements View.OnClickListener 
         btnLoad = findViewById(R.id.btnSend);
         link ="http://10.24.21.142/api_android/api_lab2.php" ;
         btnLoad.setOnClickListener(this);
+        btnBack = findViewById(R.id.btnBack); // Gán nút "Back" từ layout
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Xử lý khi nút "Back" được nhấn
+                onBackPressed(); // Quay trở lại màn hình chính (MainActivity)
+            }
+        });
 
     }
 

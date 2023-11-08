@@ -13,7 +13,7 @@ import com.example.lab2.R;
 public class bai4 extends Activity implements View.OnClickListener {
     public static final String SERVER_NAME ="http://10.24.21.142/api_android/api_lab2_bai4.php";
 private EditText edsoa,edsob,edsoc;
-private Button btnSend;
+private Button btnSend, btnBack;
 private TextView tvketqua;
 String strSoa , strSob , strSoc;
 BackgroundTask_POST bpost;
@@ -28,6 +28,14 @@ BackgroundTask_POST bpost;
         btnSend = findViewById(R.id.btnsend);
         btnSend.setOnClickListener(this);
 
+        btnBack = findViewById(R.id.btnBack); // Gán nút "Back" từ layout
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Xử lý khi nút "Back" được nhấn
+                onBackPressed(); // Quay trở lại màn hình chính (MainActivity)
+            }
+        });
     }
 
 
