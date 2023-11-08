@@ -26,7 +26,7 @@ public class BackgroundTask_GET extends AsyncTask<String,Void,String> {
 
     @Override
     protected String doInBackground(String... strings) {
-        link +="?name= "+name+"&score"+score;
+        link += "?name=" + name + "&score=" + score;
         try {
             URL url = new URL(link);
             HttpURLConnection urlConnection =(HttpURLConnection) url.openConnection();

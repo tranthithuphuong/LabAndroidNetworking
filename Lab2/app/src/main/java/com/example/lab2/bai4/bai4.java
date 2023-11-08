@@ -11,7 +11,7 @@ import com.example.lab2.R;
 
 
 public class bai4 extends Activity implements View.OnClickListener {
-    public static final String SERVER_NAME ="http://192.168.1.7/api_android/api_lab2_bai4.php";
+    public static final String SERVER_NAME ="http://10.24.21.142/api_android/api_lab2_bai4.php";
 private EditText edsoa,edsob,edsoc;
 private Button btnSend;
 private TextView tvketqua;

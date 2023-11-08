@@ -30,7 +30,7 @@ public class MainBai2 extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        String link ="http://192.168.1.7/api_android/api_lab2_bai2.php";
+        String link ="http://10.24.21.142/api_android/api_lab2_bai2.php";
         AsyncTask_POST taskPost = new AsyncTask_POST(this, edtDai.getText().toString(), edtRong.getText().toString(),link,tvkq);
         taskPost.execute();
     }

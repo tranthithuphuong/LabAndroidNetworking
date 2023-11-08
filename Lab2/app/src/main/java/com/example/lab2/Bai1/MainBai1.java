@@ -25,7 +25,7 @@ public class MainBai1 extends AppCompatActivity implements View.OnClickListener 
         edtName = findViewById(R.id.edtName);
         edtScore = findViewById(R.id.edtScore);
         btnLoad = findViewById(R.id.btnSend);
-        link ="http://192.168.9.103/api_android/api_lab2.php" ;
+        link ="http://10.24.21.142/api_android/api_lab2.php" ;
         btnLoad.setOnClickListener(this);
 
     }

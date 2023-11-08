@@ -9,14 +9,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 
 public class BackgroundTask_POST_bai3 extends AsyncTask<String,Void,Void> {
-    String duongdan = "http://192.168.1.7/api_android/api_lab2_bai3.php";
+    String duongdan = "http://10.24.21.142/api_android/api_lab2_bai3.php";
     Context context;
     TextView tvKq;
     String strKq;
@@ -36,7 +34,7 @@ public class BackgroundTask_POST_bai3 extends AsyncTask<String,Void,Void> {
             urlConnection.setDoOutput(true);
             urlConnection.setRequestMethod("POST");
             urlConnection.setFixedLengthStreamingMode(param.getBytes().length);
-            urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoder");
+            urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
             PrintWriter printWriter = new PrintWriter(urlConnection.getOutputStream());
             printWriter.print(param);

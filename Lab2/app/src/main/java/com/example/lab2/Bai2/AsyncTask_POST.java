@@ -20,7 +20,7 @@ public class AsyncTask_POST extends AsyncTask<Void,Void,Void> {
     private String kq ="";
 
 
-    public AsyncTask_POST(Context context, String dai, String rong, String linl, TextView tvRs) {
+    public AsyncTask_POST(Context context, String dai, String rong, String link, TextView tvRs) {
         this.context = context;
         this.dai = dai;
         this.rong = rong;
@@ -38,7 +38,7 @@ public class AsyncTask_POST extends AsyncTask<Void,Void,Void> {
             urlConnection.setDoOutput(true);
             urlConnection.setRequestMethod("POST");
             urlConnection.setFixedLengthStreamingMode(ts.getBytes().length);
-            urlConnection.setRequestProperty("Content-Type","application/x-ww-form-urlencoder");
+            urlConnection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
             PrintWriter printWriter = new PrintWriter(urlConnection.getOutputStream());
             printWriter.print(ts);
             printWriter.close();
