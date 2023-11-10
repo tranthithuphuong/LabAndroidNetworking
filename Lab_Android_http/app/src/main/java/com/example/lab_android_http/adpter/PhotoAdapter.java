@@ -40,7 +40,6 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
         holder.photoTextView.setText(photo.getTitle());
         holder.idTextView.setText(String.valueOf(photo.getId()));
 
-        // Load image using Picasso (you can replace this with other image loading libraries or your own implementation)
         Picasso.get().load(photo.getUrl()).into(holder.photoImageView);
     }
 

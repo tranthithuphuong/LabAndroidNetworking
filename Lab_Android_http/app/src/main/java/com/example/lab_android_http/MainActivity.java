@@ -6,15 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.lab_android_http.adpter.PhotoAdapter;
 import com.example.lab_android_http.model.PhotoModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -25,7 +21,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-// MainActivity.java
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<PhotoModel> photoList;
@@ -52,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             List<PhotoModel> photoList = new ArrayList<>();
 
             try {
-                URL url = new URL("https://jsonplaceholder.typicode.com/photos");
+                URL url = new URL("http://10.24.35.194/api_android/photo.json");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
 
