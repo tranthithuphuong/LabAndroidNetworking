@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lab3.R;
 import com.example.lab3.bai4.model.Contact;
-
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

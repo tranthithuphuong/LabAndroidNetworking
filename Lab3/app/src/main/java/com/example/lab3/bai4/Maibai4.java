@@ -1,14 +1,14 @@
-package com.example.lab3;
+package com.example.lab3.bai4;
 
+
+import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.widget.Toast;
-
-
+import com.example.lab3.R;
 import com.example.lab3.bai4.adpter.PhotoAdapter;
 import com.example.lab3.bai4.api.PhotoApi;
 import com.example.lab3.bai4.model.Contact;
@@ -22,7 +22,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class Maibai4 extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<Contact> contactList;
     private PhotoAdapter adapter;
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_bai4);
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadPhotos() {
         // Khởi tạo Retrofit
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.25/api_android/apiphoto.php/") // Thay thế bằng URL API thực tế
+                .baseUrl("http://192.168.9.102/Thondph16247_data.json") // Thay thế bằng URL API thực tế
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Contact>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Failed to load photos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Maibai4.this, "Failed to load photos", Toast.LENGTH_SHORT).show();
             }
         });
     }
