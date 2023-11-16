@@ -1,14 +1,32 @@
 package com.example.asm;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
 
-// MainActivity.java
+import android.util.Log;
+import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.asm.adapter.BookAdapter;
+import com.example.asm.api.api;
+import com.example.asm.model.Book;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class MainActivity extends AppCompatActivity {
+
     private RecyclerView recyclerView;
-    private ProductAdapter adapter;
-    private ProductApi productApi;
+    private BookAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,39 +34,44 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recyclerView);
+        adapter = new BookAdapter(this, new ArrayList<>());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        adapter = new ProductAdapter();
         recyclerView.setAdapter(adapter);
 
-        // Khởi tạo Retrofit
+        // Call the API to get the list of books
+        callApi();
+    }
+    public void onAddButtonClick(View view) {
+        // Chuyển sang màn hình thêm sách
+        Intent intent = new Intent(this, AddBook.class);
+        startActivityForResult(intent, 1); // Sử dụng startActivityForResult nếu bạn cần nhận kết quả từ màn hình thêm sách
+    }
+    private void callApi() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost/api_android/apiphoto.php")  // Thay thế bằng URL API thực tế
+                .baseUrl("https://632c7f491aabd837399d7c73.mockapi.io/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        productApi = retrofit.create(ProductApi.class);
+        api apiService = retrofit.create(api.class);
 
-        // Load danh sách sản phẩm
-        loadProducts();
-    }
-
-    private void loadProducts() {
-        Call<List<Product>> call = productApi.getProducts();
-        call.enqueue(new Callback<List<Product>>() {
+        Call<List<Book>> call = apiService.getBooks();
+        call.enqueue(new Callback<List<Book>>() {
             @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
                 if (response.isSuccessful()) {
-                    List<Product> productList = response.body();
-                    adapter.setProducts(productList);
+                    List<Book> books = response.body();
+                    if (books != null) {
+                        // Update the data in the adapter and notify the RecyclerView
+                        adapter.setData(books);
+                    }
                 } else {
-                    Toast.makeText(MainActivity.this, "Failed to load products", Toast.LENGTH_SHORT).show();
+                    Log.e("API", "Error: " + response.code());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Network error", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<Book>> call, Throwable t) {
+                Log.e("API", "Error: " + t.getMessage());
             }
         });
     }
