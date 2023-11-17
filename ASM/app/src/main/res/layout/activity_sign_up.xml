@@ -1,0 +1,39 @@
+<!-- res/layout/activity_signup.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <EditText
+        android:id="@+id/signupEmailEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:inputType="textEmailAddress"
+        android:hint="Tên đăng ký" />
+
+    <EditText
+        android:id="@+id/signupPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signupEmailEditText"
+        android:layout_marginTop="16dp"
+        android:inputType="textPassword"
+        android:hint="Mật khẩu" />
+
+    <Button
+        android:id="@+id/signupButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signupPasswordEditText"
+        android:layout_marginTop="24dp"
+        android:text="Đăng ký" />
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signupButton"
+        android:layout_marginTop="24dp"
+        android:text="Đăng nhập" />
+</RelativeLayout>
