@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "454236279745",
+    "project_id": "androidnet-e100a",
+    "storage_bucket": "androidnet-e100a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454236279745:android:8ce7b4c49f2411efded540",
+        "android_client_info": {
+          "package_name": "com.example.chatfirebaseapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUQa9-5IOXy4F6yOne2PleIY_z4ixUYLk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,11 +4,12 @@ use Book;
 CREATE TABLE `user` (
   `id` INTEGER NOT NULL AUTO_INCREMENT primary key,
   `email` varchar(255),
-  `password` varchar(255)
+  `password` varchar(255),
+  `role` varchar(11)
 );
-INSERT INTO `user` (`email`, `password`) VALUES
-('phuongtttph28706@fpt.edu.vn', '12345'),
-('cuong@gmail.com', '12345');
+INSERT INTO `user` (`email`, `password`, `role`) VALUES
+('phuong@gmail.com', '12345', 'user'),
+('cuong@gmail.com', '12345', 'admin');
 
 CREATE TABLE `book` (
   `id` INTEGER NOT NULL AUTO_INCREMENT primary key,

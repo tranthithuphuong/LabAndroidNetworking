@@ -42,7 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent signUpIntent = new Intent(SignUpActivity.this, SignUpActivity.class);
+                Intent signUpIntent = new Intent(SignUpActivity.this, Login.class);
                 startActivity(signUpIntent);
             }
         });
@@ -51,6 +51,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void signUpUser() {
         String email = editTextEmail.getText().toString();
         String password = editTextPassword.getText().toString();
+        String role = "user";
 
         // Kiểm tra email và password
         if (isValidInput(email, password)) {
@@ -58,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
             User newUser = new User();
             newUser.setEmail(email);
             newUser.setPassword(password);
-
+            newUser.setRole(role);
             // Gọi API để đăng ký
             registerUser(newUser);
         }
@@ -109,7 +110,6 @@ public class SignUpActivity extends AppCompatActivity {
                     // Đăng ký thành công, có thể xử lý và chuyển đến màn hình đăng nhập hoặc màn hình chính
                     Intent loginIntent = new Intent(SignUpActivity.this, Login.class);
                     startActivity(loginIntent);
-                    finish();
                 } else {
                     Toast.makeText(SignUpActivity.this, "Tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
                 }

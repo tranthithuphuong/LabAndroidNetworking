@@ -58,7 +58,7 @@ public class AddBook extends AppCompatActivity {
 
     private void addBookToApi(Book newBook) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.198:3000/") // Đường dẫn cơ sở của API
+                .baseUrl("http://192.168.1.18:3000/") // Đường dẫn cơ sở của API
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -71,6 +71,7 @@ public class AddBook extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     // Thêm sách thành công
                     Intent mainIntent = new Intent(AddBook.this, MainActivity.class);
+                    mainIntent.putExtra("userRole", "admin");
                     startActivity(mainIntent);
 
                     // Đóng màn hình thêm sách sau khi thêm xong

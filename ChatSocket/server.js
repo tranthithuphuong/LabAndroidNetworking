@@ -16,7 +16,8 @@ io.on('connection', (socket) => {
   // Xử lý khi có tin nhắn mới
   socket.on('chat message', (msg) => {
     console.log(msg)
-    io.emit('chat message', msg); // Gửi tin nhắn tới tất cả người dùng
+    io.emit('chat message', msg); 
+    // Gửi tin nhắn tới tất cả người dùng
   });
 
   // Xử lý khi người dùng ngắt kết nối

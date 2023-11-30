@@ -73,7 +73,7 @@ public class EditBookActivity extends AppCompatActivity {
 
     private void updateBookApi(Book updatedBook) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.198:3000/")
+                .baseUrl("http://192.168.1.18:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -85,6 +85,7 @@ public class EditBookActivity extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Intent mainIntent = new Intent(EditBookActivity.this, MainActivity.class);
+                    mainIntent.putExtra("userRole", "admin");
                     startActivity(mainIntent);
                     finish();
                 } else {

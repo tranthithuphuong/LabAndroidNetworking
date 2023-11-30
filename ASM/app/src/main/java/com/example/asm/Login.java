@@ -23,6 +23,7 @@ public class Login extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextPass;
     private Button btnLogin, btnSignUp;
+    private String userRole; // Thêm trường để lưu trạng thái quyền của người dùng
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +68,11 @@ public class Login extends AppCompatActivity {
                         List<User> userList = response.body();
 
                         // Kiểm tra thông tin đăng nhập
-                        if (validateLogin(userList, email, password)) {
+                        User loggedInUser = validateLogin(userList, email, password);
+                        if (loggedInUser != null) {
+                            userRole = loggedInUser.getRole(); // Lưu trạng thái quyền
                             Intent mainIntent = new Intent(Login.this, MainActivity.class);
+                            mainIntent.putExtra("userRole", userRole); // Chuyển trạng thái quyền sang MainActivity
                             startActivity(mainIntent);
                             Toast.makeText(Login.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                         } else {
@@ -100,16 +104,18 @@ public class Login extends AppCompatActivity {
         return true;
     }
 
-    private boolean validateLogin(List<User> userList, String email, String password) {
+    private User validateLogin(List<User> userList, String email, String password) {
         for (User user : userList) {
             if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
-                return true; // Thông tin đăng nhập hợp lệ
+                return user; // Trả về người dùng hợp lệ
             }
         }
-        return false; // Thông tin đăng nhập không hợp lệ
+        return null; // Không tìm thấy người dùng hợp lệ
     }
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
+
 }

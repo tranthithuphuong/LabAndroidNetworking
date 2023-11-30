@@ -31,10 +31,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
     private List<Book> bookList;
     private Context context;
-
-    public BookAdapter(Context context, List<Book> bookList) {
+    private String userRole;
+    private OnItemClickListener listener;
+    public BookAdapter(Context context, List<Book> bookList, String userRole) {
         this.context = context;
         this.bookList = bookList;
+        this.userRole = userRole;
+
     }
 
     @NonNull
@@ -53,6 +56,38 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         Picasso.get()
                 .load(book.getAvatar())
                 .into(holder.imageViewAvatar);
+
+        if (!"admin".equals(userRole)) {
+            holder.buttonDelete.setVisibility(View.GONE);
+            holder.buttonEdit.setVisibility(View.GONE);
+        } else {
+            // Nếu là admin, hiển thị nút "Sửa" và "Xoá"
+            holder.buttonDelete.setVisibility(View.VISIBLE);
+            holder.buttonEdit.setVisibility(View.VISIBLE);
+        }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    int position = holder.getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(position);
+                    }
+                }
+            }
+        });
+    }
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    // Phương thức để thiết lập sự kiện lắng nghe
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+    public Book getItem(int position) {
+        return bookList.get(position);
     }
 
     @Override
@@ -66,12 +101,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+        notifyDataSetChanged(); // Cập nhật adapter khi có giá trị mới
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageViewAvatar; // Ensure this is an ImageView
         TextView textViewName;
         Button buttonDelete;
         Button buttonEdit;
-
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -94,8 +133,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
                     onEditClick(getAdapterPosition());
                 }
             });
-
         }
+
         private void onDeleteClick(int position) {
             // Lấy cuốn sách tại vị trí được chọn
             Book bookToDelete = bookList.get(position);
@@ -105,9 +144,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
             // Gọi phương thức để xóa cuốn sách và cập nhật RecyclerView
             deleteBookApi(bookId, position);
         }
+
         private void deleteBookApi(String bookId, final int position) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.0.198:3000/")
+                    .baseUrl("http://192.168.1.18:3000/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
@@ -132,6 +172,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
                 }
             });
         }
+
         private void onEditClick(int position) {
             // Lấy cuốn sách tại vị trí được chọn
             Book bookToEdit = bookList.get(position);

@@ -11,7 +11,17 @@ public class User {
     @SerializedName("password")
     private String password;
 
-    // Các phương thức getter và setter
+    @SerializedName("role")
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+// Các phương thức getter và setter
 
     public int getId() {
         return id;
